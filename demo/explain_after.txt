@@ -1,0 +1,2 @@
+Index Scan using idx_orders_user_created_at on orders  (cost=0.43..123.45 rows=50 width=32)
+  Index Cond: (user_id = 42)

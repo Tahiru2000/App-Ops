@@ -12,7 +12,15 @@
 
 ## Quick Commands
 ```bash
+# Run complete analysis on logs data
 python runbook/scripts/parse_nginx.py logs/access.log
 python runbook/scripts/parse_app_logs.py logs/app.log
 python runbook/scripts/check_postgres_slow.py logs/postgres.log 1000
 ```
+
+# Project Structure
+- `scripts/` - Log analysis tools
+- `django_snippets/` - Django-specific optimizations  
+- `middleware/` - Performance middleware
+- `monitoring/` - Alerting configuration
+- `demo/` - Sample data for testing

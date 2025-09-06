@@ -1,10 +1,10 @@
 # Demo Guide — Django Troubleshooting Runbook
 
-This guide walks through the included **demo dataset** so you (or reviewers) can run the scripts and see how the runbook works.
+This guide walks through the included **demo dataset** so you can run the scripts and see how the runbook works.
 
 ---
 
-## 1. Parse Nginx Logs
+# 1. Parse Nginx Logs
 Run:
 ```bash
 python runbook/scripts/parse_nginx.py runbook/demo/access.log
@@ -16,7 +16,7 @@ Expected output file: `metrics_per_minute.csv`
 
 ---
 
-## 2. Parse Application Logs
+# 2. Parse Application Logs
 Run:
 ```bash
 python runbook/scripts/parse_app_logs.py runbook/demo/app.log
@@ -28,7 +28,7 @@ Expected output file: `app_metrics_per_minute.csv`
 
 ---
 
-## 3. Parse Postgres Slow Logs
+# 3. Parse Postgres Slow Logs
 Run:
 ```bash
 python runbook/scripts/check_postgres_slow.py runbook/demo/postgres.log 1000
@@ -46,7 +46,7 @@ Expected output file: `postgres_slow.csv`
 
 ---
 
-## 4. Explain Query Plan in Django
+# 4. Explain Query Plan in Django
 Before applying the fix:
 ```text
 Seq Scan on orders (cost=0.00..12345.67 rows=50 width=32)
@@ -63,7 +63,7 @@ Index Scan using idx_orders_user_created_at on orders (cost=0.43..123.45 rows=50
 
 ---
 
-## 5. Apply the Fix
+# 5. Apply the Fix
 1. Add index to model (`models.py`):
    ```python
    class Meta:
@@ -77,18 +77,16 @@ Index Scan using idx_orders_user_created_at on orders (cost=0.43..123.45 rows=50
 
 ---
 
-## 6. Short-term Mitigations
+# 6. Short-term Mitigations
 - Use cache: `django_snippets/cache_snippet.py` (caches orders for 90s).  
 - Tune DB connections: set `CONN_MAX_AGE=60` in `settings.py`.  
 - Add middleware timeout: `middleware/timeout_middleware.py`.  
 
 ---
 
-## 7. Alerts
+# 7. Alerts
 Prometheus alert examples are in `monitoring/prometheus_alerts.yaml`:  
 - Trigger if p95 > 1s for 5 minutes.  
 - Trigger if error rate > 2% for 3 minutes.
 
----
-
-✅ With the demo dataset, you can show the full workflow: logs → metrics → diagnosis → Django fix → validation.
+--The full workflow: logs → metrics → diagnosis → Django fix → validation.

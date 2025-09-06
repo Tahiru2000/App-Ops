@@ -1,4 +1,3 @@
-
 import sys, re, csv
 
 DUR_RE = re.compile(r'duration:\s+(?P<dur>[\d.]+)\s+ms\s+statement:\s+(?P<stmt>.+)$')

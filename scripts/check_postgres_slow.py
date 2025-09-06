@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-# scripts/check_postgres_slow.py
-# Usage: python scripts/check_postgres_slow.py /path/to/postgres.log [threshold_ms]
-# Output: postgres_slow.csv
 
 import sys, re, csv
 
